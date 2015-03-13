@@ -125,8 +125,14 @@
                     if (event.ctrlKey) return;
 
                     this.startTouch = touch;
+                    
+                    if (list.options.startDelayMsec > 500) {
+                        this.prevent_def_timeout = setTimeout(function() {
+                            event.preventDefault();
+                        }, 500);
+                    }
+                    
                     this.timeout = setTimeout(function() {
-                        event.preventDefault();
                         list.dragStart(touch);
                     }, list.options.startDelayMsec)
                 },
@@ -134,12 +140,13 @@
                 isBigMove: function(touch) {
                     return this.startTouch &&
                         (Math.abs(this.startTouch.pageX - touch.pageX) +
-                        Math.abs(this.startTouch.pageY - touch.pageY)) > 40;
+                        Math.abs(this.startTouch.pageY - touch.pageY)) > 30;
                 },
 
                 cleanup: function() {
                     this.startTouch = null;
                     clearTimeout(this.timeout);
+                    clearTimeout(this.prevent_def_timeout);
                 }
             };
 
