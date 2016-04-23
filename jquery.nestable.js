@@ -249,7 +249,6 @@
 
         destroy: function ()
         {
-            this.expandAll();
             this.el.trigger('destroy-nestable');
         },
 
