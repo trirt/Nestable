@@ -209,8 +209,8 @@
             };
 
             if (hasTouch) {
-                list.el[0].addEventListener(eStart, onStartEvent, false);
-                window.addEventListener(eMove, onMoveEvent, false);
+                list.el[0].addEventListener(eStart, onStartEvent, { passive: false });
+                window.addEventListener(eMove, onMoveEvent, { passive: false });
                 window.addEventListener(eEnd, onEndEvent, false);
                 window.addEventListener(eCancel, onEndEvent, false);
             } else {
