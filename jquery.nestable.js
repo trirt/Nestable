@@ -138,9 +138,10 @@
                 },
 
                 isBigMove: function(touch) {
-                    return this.startTouch &&
-                        (Math.abs(this.startTouch.pageX - touch.pageX) +
-                        Math.abs(this.startTouch.pageY - touch.pageY)) > 30;
+                    if (!this.startTouch) return false;
+                    var dx = this.startTouch.clientX - touch.clientX;
+                    var dy = this.startTouch.clientY - touch.clientY;
+                    return Math.sqrt(dx*dx + dy*dy) > 15;
                 },
 
                 cleanup: function() {
